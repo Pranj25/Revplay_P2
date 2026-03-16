@@ -1,0 +1,33 @@
+<div class="albums-container">
+  <h2 class="page-title">All Albums</h2>
+  
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading albums...</p>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && !error" class="albums-grid">
+    <div *ngFor="let album of albums" class="album-card" (click)="viewAlbum(album)">
+      <div class="album-cover">
+        <img [src]="getAlbumCover(album.coverArt)" [alt]="album.name">
+      </div>
+      <div class="album-info">
+        <h3 class="album-name">{{ album.name }}</h3>
+        <p class="artist-name">{{ album.artist ? album.artist.artistName : 'Unknown Artist' }}</p>
+        <p class="release-date" *ngIf="album.releaseDate">{{ album.releaseDate | date:'yyyy' }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && !error && albums.length === 0" class="no-data">
+    <svg viewBox="0 0 16 16" class="no-data-icon">
+      <path d="M0 2a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H2a2 2 0 01-2-2V2zm11.5 5.5a.5.5 0 00-1 0V9H9a.5.5 0 000 1h1.5v1.5a.5.5 0 001 0V10H13a.5.5 0 000-1h-1.5V7.5zm-7-1a.5.5 0 01.5.5v1h1a.5.5 0 010 1h-1v1a.5.5 0 01-1 0v-1h-1a.5.5 0 010-1h1v-1a.5.5 0 01.5-.5z"/>
+    </svg>
+    <p>No albums</p>
+    <span>Albums will appear here when songs are uploaded</span>
+  </div>
+</div>

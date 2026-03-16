@@ -1,0 +1,61 @@
+<div class="auth-container">
+  <div class="auth-box">
+    <h1>Sign up for free to start listening</h1>
+    
+    @if (successMessage) {
+      <div class="success-message">
+        {{ successMessage }}
+      </div>
+    }
+    
+    @if (errorMessage) {
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
+    }
+    
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Email address</label>
+        <input type="email" [(ngModel)]="email" name="email" placeholder="name@domain.com" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" [(ngModel)]="username" name="username" placeholder="Enter a username" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" [(ngModel)]="password" name="password" placeholder="Create a password" required>
+      </div>
+
+      <div class="form-group">
+        <label>Gender</label>
+        <select [(ngModel)]="gender" name="gender" required>
+          <option value="">Select gender</option>
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>
+          <option value="OTHER">Other</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Account Type</label>
+        <select [(ngModel)]="role" name="role">
+          <option value="">Select role</option>
+          <option value="USER">Listener</option>
+          <option value="ARTIST">Artist</option>
+        </select>
+      </div>
+      
+      <button type="submit" class="btn-submit">Sign up</button>
+    </form>
+    
+    <div class="divider"></div>
+    
+    <p class="switch-auth">
+      Already have an account? <a routerLink="/login">Log in here</a>
+    </p>
+  </div>
+</div>

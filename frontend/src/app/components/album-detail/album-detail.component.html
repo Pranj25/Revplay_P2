@@ -1,0 +1,62 @@
+<div class="album-detail-container">
+  <button class="back-btn" (click)="goBack()">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+      <path d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+    </svg>
+    Back to Albums
+  </button>
+
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading songs...</p>
+  </div>
+
+  <div *ngIf="!loading && album" class="album-header">
+    <div class="album-cover">
+      <img [src]="getAlbumCover()" [alt]="album.name">
+    </div>
+    <div class="album-info">
+      <h1 class="album-name">{{ album.name }}</h1>
+      <p class="artist-name">{{ album.artist?.artistName || 'Unknown Artist' }}</p>
+      <p class="song-count">{{ songs.length }} {{ songs.length === 1 ? 'song' : 'songs' }}</p>
+      <p class="release-date" *ngIf="album.releaseDate">Released: {{ album.releaseDate | date:'yyyy' }}</p>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && songs.length > 0" class="songs-section">
+    <h2>Songs</h2>
+    <div class="songs-list">
+      <div *ngFor="let song of songs; let i = index" class="song-item" (click)="playSong(song)">
+        <div class="song-number">{{ i + 1 }}</div>
+        <div class="song-cover">
+          <img [src]="getSongCover(song)" [alt]="song.title">
+        </div>
+        <div class="song-info">
+          <div class="song-title">{{ song.title }}</div>
+          <div class="song-artist">{{ song.artist?.artistName || 'Unknown Artist' }}</div>
+        </div>
+        <div class="song-genre">{{ song.genre }}</div>
+        <button 
+          *ngIf="authService.currentUser()"
+          type="button"
+          class="favorite-btn"
+          (click)="toggleFavorite($event, song.id)"
+          [class.active]="favoriteService.isFavorite(song.id)"
+          title="Add to favorites"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && songs.length === 0" class="no-data">
+    <svg viewBox="0 0 16 16" class="no-data-icon">
+      <path d="M0 2a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H2a2 2 0 01-2-2V2zm11.5 5.5a.5.5 0 00-1 0V9H9a.5.5 0 000 1h1.5v1.5a.5.5 0 001 0V10H13a.5.5 0 000-1h-1.5V7.5z"/>
+    </svg>
+    <p>No songs found</p>
+    <span>This album has no songs yet</span>
+  </div>
+</div>

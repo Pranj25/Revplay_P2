@@ -1,0 +1,161 @@
+.albums-container {
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 48px;
+  margin-bottom: 40px;
+  color: #fff;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: #b3b3b3;
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #282828;
+    border-top-color: #1db954;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  p {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error-message {
+  padding: 20px;
+  background: #ff4444;
+  color: #fff;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.albums-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.album-card {
+  background: #282828;
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background: #333;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.album-cover {
+  position: relative;
+  padding-bottom: 100%;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  overflow: hidden;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.album-info {
+  .album-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .artist-name {
+    font-size: 14px;
+    color: #b3b3b3;
+    margin-bottom: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .release-date {
+    font-size: 12px;
+    color: #888;
+  }
+}
+
+.no-data {
+  text-align: center;
+  padding: 60px 20px;
+  color: #b3b3b3;
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .albums-container {
+    padding: 20px;
+  }
+
+  .page-title {
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+
+  .albums-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+  }
+}
+
+.no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+
+  .no-data-icon {
+    width: 80px;
+    height: 80px;
+    fill: rgba(168, 85, 247, 0.3);
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+  }
+
+  span {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+}

@@ -1,0 +1,43 @@
+<div class="history-container">
+  <div class="header">
+    <h2 class="page-title"> History</h2>
+    @if (songs.length > 0) {
+      <button class="btn-clear" (click)="clearHistory()">Clear History</button>
+    }
+  </div>
+  
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading history...</p>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && !error" class="songs-grid">
+    <div *ngFor="let song of songs" class="song-card" (click)="playSong(song)">
+      <div class="song-cover">
+        <img [src]="getSongCover(song)" [alt]="song.title">
+        <div class="play-overlay">
+          <svg viewBox="0 0 16 16">
+            <path d="M3 1.713a.7.7 0 011.05-.607l10.89 6.288a.7.7 0 010 1.212L4.05 14.894A.7.7 0 013 14.288V1.713z"/>
+          </svg>
+        </div>
+      </div>
+      <div class="song-info">
+        <div class="song-title">{{ song.title }}</div>
+        <div class="song-artist">{{ song.artist?.artistName || 'Unknown Artist' }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && !error && songs.length === 0" class="no-data">
+    <svg viewBox="0 0 16 16" class="no-data-icon">
+      <path d="M8 3.5a.5.5 0 00-1 0V9a.5.5 0 00.252.434l3.5 2a.5.5 0 00.496-.868L8 8.71V3.5z"/>
+      <path d="M8 16A8 8 0 108 0a8 8 0 000 16zm7-8A7 7 0 111 8a7 7 0 0114 0z"/>
+    </svg>
+    <p>No history</p>
+    <span>Songs you play will appear here</span>
+  </div>
+</div>

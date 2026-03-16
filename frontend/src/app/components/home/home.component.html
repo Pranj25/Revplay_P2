@@ -1,0 +1,48 @@
+<div class="home-container">
+  <div class="hero-section">
+    <h1>Welcome to <span class="brand">RevPlay</span></h1>
+    <p>Discover and enjoy music streaming</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <h2>All Songs</h2>
+      <a routerLink="/songs" class="see-all">See all</a>
+    </div>
+    
+    <div *ngIf="loading" class="loading">
+      <div class="spinner"></div>
+    </div>
+    
+    <div *ngIf="!loading && songs.length > 0" class="songs-grid">
+      <div *ngFor="let song of songs" class="song-card">
+        <div class="song-cover" (click)="playSong(song)">
+          <img [src]="getSongCover(song)" [alt]="song.title">
+          <div class="play-overlay">
+            <svg viewBox="0 0 16 16">
+              <path d="M3 1.713a.7.7 0 011.05-.607l10.89 6.288a.7.7 0 010 1.212L4.05 14.894A.7.7 0 013 14.288V1.713z"/>
+            </svg>
+          </div>
+        </div>
+        <div class="song-info">
+          <div class="song-title">{{ song.title }}</div>
+          <div class="song-artist">{{ song.artist?.artistName || 'Unknown Artist' }}</div>
+        </div>
+        <button 
+          *ngIf="authService.currentUser()"
+          class="favorite-btn" 
+          (click)="toggleFavorite($event, song.id)"
+          [class.active]="favoriteService.isFavorite(song.id)"
+        >
+          <svg viewBox="0 0 16 16">
+            <path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <div *ngIf="!loading && songs.length === 0" class="no-data">
+      <p>No songs uploaded yet</p>
+    </div>
+  </div>
+</div>
