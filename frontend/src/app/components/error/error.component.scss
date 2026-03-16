@@ -1,0 +1,45 @@
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 24px;
+}
+
+h1 {
+  font-size: 120px;
+  font-weight: 900;
+  color: var(--primary);
+  margin: 0;
+  line-height: 1;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 24px 0 16px;
+}
+
+p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+}
+
+.btn-home {
+  background: var(--primary);
+  color: var(--text-primary);
+  padding: 12px 32px;
+  border-radius: 500px;
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.3s;
+  display: inline-block;
+}
+
+.btn-home:hover {
+  background: var(--primary-hover);
+  transform: scale(1.04);
+}
