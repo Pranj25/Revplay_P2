@@ -1,0 +1,16 @@
+package com.revplay.dto;
+
+import lombok.Data;
+
+@Data
+public class AuthRequest {
+    private String email;
+    private String username;
+    private String password;
+    private String emailOrUsername;
+    private String gender;
+    private String role;
+    private String artistName;
+    private String bio;
+    private String genre;
+}
