@@ -1,0 +1,5 @@
+config/eureka-server-dev.properties
+config/config-server-dev.properties
+config/user-service-dev.properties
+config/catalog-service-dev.properties
+config/api-gateway-dev.properties
